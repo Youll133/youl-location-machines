@@ -1,0 +1,48 @@
+const machines = [
+  {
+    id: 1,
+    nom: "Chargeuse Caterpillar 966",
+    prix: "180 000 FCFA / jour",
+    ville: "Partout en Côte d'Ivoire",
+    disponible: true,
+    image: "/images/machines/chargeuse.jpg",
+    type: "Chargeuse sur pneus",
+    puissance: "275 CV",
+    poids: "23 tonnes",
+  },
+  {
+    id: 2,
+    nom: "Tractopelle Caterpillar 428",
+    prix: "160 000 FCFA / jour",
+    ville: "Partout en Côte d'Ivoire",
+    disponible: true,
+    image: "/images/machines/tractopelle.jpg",
+    type: "Tractopelle",
+    puissance: "95 CV",
+    poids: "8 tonnes",
+  },
+  {
+    id: 3,
+    nom: "Niveleuse Caterpillar 14E",
+    prix: "180 000 FCFA / jour",
+    ville: "Partout en Côte d'Ivoire",
+    disponible: true,
+    image: "/images/machines/niveleuse.jpg",
+    type: "Niveleuse",
+    puissance: "185 CV",
+    poids: "15 tonnes",
+  },
+  {
+    id: 4,
+    nom: "Bulldozer Caterpillar D8",
+    prix: "300 000 FCFA / jour",
+    ville: "Partout en Côte d'Ivoire",
+    disponible: true,
+    image: "/images/machines/bulldozer.jpg",
+    type: "Bulldozer",
+    puissance: "354 CV",
+    poids: "38 tonnes",
+  },
+];
+
+export default machines;
