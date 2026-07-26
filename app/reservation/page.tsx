@@ -53,18 +53,42 @@ useEffect(() => {
   chargerPrix();
 }, [machine, nbJours]);
 async function envoyerDevis() {
+  if (
+    !nom.trim() ||
+    !telephone.trim() ||
+    !machine.trim() ||
+    !ville.trim() ||
+    !debut ||
+    !fin
+  ) {
+    alert("❌ Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
+
+  if (new Date(fin) < new Date(debut)) {
+    alert("❌ La date de fin doit être après la date de début.");
+    return;
+  }
+  if (telephone.replace(/\D/g, "").length < 8) {
+  alert("❌ Numéro de téléphone invalide.");
+  return;
+}
+if (nbJours <= 0) {
+  alert("❌ Veuillez choisir des dates valides.");
+  return;
+}
   const { error } = await supabase.from("devis").insert([
     {
-  nom,
-  telephone,
-  machine,
-  ville,
-  date_debut: debut,
-  date_fin: fin,
-  jours: nbJours,
-  description,
-  prix_total: prixTotal,
-},
+      nom,
+      telephone,
+      machine,
+      ville,
+      date_debut: debut,
+      date_fin: fin,
+      jours: nbJours,
+      description,
+      prix_total: prixTotal,
+    },
   ]);
 
   if (error) {
@@ -152,6 +176,7 @@ setPrixTotal(0);
       <input
         type="date"
         value={debut}
+        min={new Date().toISOString().split("T")[0]}
         onChange={(e) => setDebut(e.target.value)}
         style={input}
       />
@@ -159,11 +184,12 @@ setPrixTotal(0);
       <label style={label}>Date de fin</label>
 
       <input
-        type="date"
-        value={fin}
-        onChange={(e) => setFin(e.target.value)}
-        style={input}
-      />
+  type="date"
+  value={fin}
+  min={debut || new Date().toISOString().split("T")[0]}
+  onChange={(e) => setFin(e.target.value)}
+  style={input}
+/>
 
       <textarea
         placeholder="Décrivez votre chantier..."
