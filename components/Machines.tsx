@@ -1,11 +1,11 @@
 "use client";
-
+import FavoriteButton from "./FavoriteButton";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 
 export default function Machines() {
-  const [favorites, setFavorites] = useState<number[]>([]);
+
   const [search, setSearch] = useState("");
   const [machines, setMachines] = useState<any[]>([]);
 const [loading, setLoading] = useState(true);
@@ -27,15 +27,7 @@ useEffect(() => {
   loadMachines();
 }, []);
 
- const toggleFavorite = (id: number) => {
-  setFavorites((prev) => {
-    if (prev.includes(id)) {
-      return prev.filter((item) => item !== id);
-    }
-
-    return [...prev, id];
-  });
-};
+ 
 if (loading) {
   return (
     <div
@@ -138,25 +130,7 @@ if (loading) {
     position: "relative",
   }}
 >
-  <button
-    onClick={() => toggleFavorite(machine.id)}
-    style={{
-      position: "absolute",
-      top: "15px",
-      right: "15px",
-      width: "46px",
-      height: "46px",
-      borderRadius: "50%",
-      border: "none",
-      background: "#fff",
-      cursor: "pointer",
-      boxShadow: "0 5px 15px rgba(0,0,0,.15)",
-      fontSize: "24px",
-      transition: "0.2s",
-    }}
-  >
-    {favorites.includes(machine.id) ? "❤️" : "🤍"}
-  </button>
+ <FavoriteButton machineId={machine.id} />
               <img
                 src={machine.image}
                 alt={machine.nom}

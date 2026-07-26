@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { supabase } from "../../lib/supabase";
 
 
 export default function ReservationPage() {
@@ -12,43 +12,78 @@ export default function ReservationPage() {
   const [debut, setDebut] = useState("");
   const [fin, setFin] = useState("");
   const [description, setDescription] = useState("");
+  const [prixJour, setPrixJour] = useState(0);
+const [prixTotal, setPrixTotal] = useState(0);
 
 
-  let nbJours = 0;
+ let nbJours = 0;
 
-  if (debut && fin) {
-    const dateDebut = new Date(debut);
-    const dateFin = new Date(fin);
+if (debut && fin) {
+  const dateDebut = new Date(debut);
+  const dateFin = new Date(fin);
 
-    const difference = dateFin.getTime() - dateDebut.getTime();
+  const difference = dateFin.getTime() - dateDebut.getTime();
 
-    nbJours = Math.ceil(difference / (1000 * 60 * 60 * 24)) + 1;
+  nbJours = Math.ceil(difference / (1000 * 60 * 60 * 24)) + 1;
+}
 
-    
+useEffect(() => {
+  async function chargerPrix() {
+    if (!machine) return;
+
+    const { data } = await supabase
+      .from("machines")
+      .select("prix")
+      .ilike("nom", machine)
+      .maybeSingle();
+
+    if (data) {
+      const prix = Number(
+        String(data.prix).replace(/[^\d]/g, "")
+      );
+
+      setPrixJour(prix);
+      setPrixTotal(prix * nbJours);
+    } else {
+      setPrixJour(0);
+      setPrixTotal(0);
+    }
   }
 
-  const message = `Bonjour, je souhaite demander un devis.
+  chargerPrix();
+}, [machine, nbJours]);
+async function envoyerDevis() {
+  const { error } = await supabase.from("devis").insert([
+    {
+  nom,
+  telephone,
+  machine,
+  ville,
+  date_debut: debut,
+  date_fin: fin,
+  jours: nbJours,
+  description,
+  prix_total: prixTotal,
+},
+  ]);
 
-Nom : ${nom}
+  if (error) {
+    alert("❌ " + error.message);
+    return;
+  }
 
-Téléphone : ${telephone}
+  alert("✅ Demande enregistrée !");
 
-Machine : ${machine}
-
-Ville : ${ville}
-
-Date de début : ${debut}
-
-Date de fin : ${fin}
-
-Nombre de jours : ${nbJours}
-
-Nombre de jours : ${nbJours}
-
-Description :
-
-${description}`;
-
+  setNom("");
+  setTelephone("");
+  setMachine("");
+  setVille("");
+  setDebut("");
+  setFin("");
+  setDescription("");
+  setPrixJour(0);
+setPrixTotal(0);
+}
   return (
     <main
       style={{
@@ -159,30 +194,38 @@ ${description}`;
           <p>
             📅 Nombre de jours : <strong>{nbJours}</strong>
           </p>
-          
+          <p>
+  💰 Prix par jour : <strong>{prixJour.toLocaleString()} FCFA</strong>
+</p>
+
+<p
+  style={{
+    fontSize: "24px",
+    fontWeight: "bold",
+    color: "#16a34a",
+  }}
+>
+  Total estimé : {prixTotal.toLocaleString()} FCFA
+</p>
         </div>
       )}
 
-      <a
-        href={`https://wa.me/33780260603?text=${encodeURIComponent(message)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "block",
-          width: "100%",
-          padding: "18px",
-          background: "#22c55e",
-          color: "#fff",
-          textAlign: "center",
-          textDecoration: "none",
-          borderRadius: "12px",
-          fontSize: "20px",
-          fontWeight: "bold",
-          boxSizing: "border-box",
-        }}
-      >
-        📲 Envoyer la demande sur WhatsApp
-      </a>
+      <button
+  onClick={envoyerDevis}
+  style={{
+    width: "100%",
+    padding: "18px",
+    background: "#22c55e",
+    color: "#fff",
+    border: "none",
+    borderRadius: "12px",
+    fontSize: "20px",
+    fontWeight: "bold",
+    cursor: "pointer",
+  }}
+>
+  📩 Envoyer la demande
+</button>
     </main>
   );
 }

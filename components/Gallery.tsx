@@ -1,53 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function Gallery({
   images,
 }: {
   images: string[];
 }) {
-  const [current, setCurrent] = useState(images[0]);
-
   return (
-    <div>
-      <img
-        src={current}
-        alt="Machine"
-        style={{
-          width: "100%",
-          height: "550px",
-          objectFit: "cover",
-          borderRadius: "20px",
-        }}
-      />
-
-      <div
-        style={{
-          display: "flex",
-          gap: "15px",
-          marginTop: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        {images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`Photo ${index + 1}`}
-            onClick={() => setCurrent(img)}
+    <Swiper
+      modules={[Navigation, Pagination]}
+      navigation
+      pagination={{ clickable: true }}
+      spaceBetween={20}
+      slidesPerView={1}
+      style={{
+        width: "100%",
+        borderRadius: "20px",
+      }}
+    >
+      {images.map((img, index) => (
+        <SwiperSlide key={index}>
+          <div
             style={{
-              width: "120px",
-              height: "80px",
-              objectFit: "cover",
-              borderRadius: "10px",
-              cursor: "pointer",
-              border:
-                current === img ? "3px solid #FFD400" : "2px solid #ddd",
+              width: "100%",
+              background: "#f3f4f6",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "20px",
+              overflow: "hidden",
+              minHeight: "300px",
+              maxHeight: "550px",
             }}
-          />
-        ))}
-      </div>
-    </div>
+          >
+            <img
+              src={img}
+              alt={`Photo ${index + 1}`}
+              style={{
+                width: "100%",
+                height: "100%",
+                maxHeight: "550px",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }

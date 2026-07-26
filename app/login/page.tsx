@@ -20,17 +20,15 @@ export default function LoginPage() {
     });
 
     if (error) {
-      alert("❌ " + error.message);
-      return;
-    }
+  alert("❌ " + error.message);
+  return;
+}
 
-    alert("✅ Connexion réussie !");
+alert("✅ Connexion réussie !");
 
-    // Rafraîchit le routeur pour prendre en compte la session
-    router.refresh();
+await new Promise((resolve) => setTimeout(resolve, 500));
 
-    // Redirige vers l'administration
-    router.replace("/admin");
+router.replace("/admin");
   }
 
   return (

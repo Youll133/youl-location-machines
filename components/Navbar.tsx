@@ -121,10 +121,6 @@ export default function Navbar() {
               Entreprise
             </Link>
 
-            <Link href="/tarifs" style={link}>
-              Tarifs
-            </Link>
-
             <Link href="/galerie" style={link}>
               Galerie
             </Link>
@@ -198,14 +194,6 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             🏢 Entreprise
-          </Link>
-
-          <Link
-            href="/tarifs"
-            style={link}
-            onClick={() => setMenuOpen(false)}
-          >
-            💰 Tarifs
           </Link>
 
           <Link

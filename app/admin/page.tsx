@@ -1,4 +1,4 @@
-
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import LogoutButton from "../../components/LogoutButton";
@@ -8,6 +8,13 @@ export default async function AdminPage() {
  
 
   const supabase = await createClient();
+ const {
+  data: { user },
+} = await supabase.auth.getUser();
+
+if (!user) {
+  redirect("/login");
+}
 
   const { data: machines } = await supabase
     .from("machines")
@@ -82,10 +89,18 @@ export default async function AdminPage() {
           <p>{devis?.length ?? 0} demande(s)</p>
         </Link>
 
-        <div style={card}>
-          <h2>⭐⭐ Avis clients</h2>
-          <p>{avis?.length ?? 0} avis</p>
-        </div>
+        <Link
+  href="/admin/avis"
+  style={{
+    ...card,
+    textDecoration: "none",
+    color: "inherit",
+    display: "block",
+  }}
+>
+  <h2>⭐⭐ Avis clients</h2>
+  <p>{avis?.length ?? 0} avis</p>
+</Link>
 
         <div style={card}>
           <h2>👀 Vues</h2>
@@ -174,7 +189,17 @@ export default async function AdminPage() {
         >
           📄 Gérer les devis
         </Link>
-
+<Link
+  href="/admin/avis"
+  style={{
+    ...button,
+    textDecoration: "none",
+    color: "#111",
+    display: "inline-block",
+  }}
+>
+  ⭐ Gérer les avis
+</Link>
         <Link
           href="/machines"
           style={{

@@ -54,20 +54,6 @@ export default function Partners() {
           width={150}
           height={70}
         />
-
-        <Image
-          src="/partners/volvo.png"
-          alt="Volvo"
-          width={150}
-          height={70}
-        />
-
-        <Image
-          src="/partners/hitachi.png"
-          alt="Hitachi"
-          width={150}
-          height={70}
-        />
       </div>
     </section>
   );

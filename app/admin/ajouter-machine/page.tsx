@@ -8,6 +8,8 @@ export default function AjouterMachinePage() {
 const [image3, setImage3] = useState<File | null>(null);
 const [image4, setImage4] = useState<File | null>(null);
 const [image5, setImage5] = useState<File | null>(null);
+const [image6, setImage6] = useState<File | null>(null);
+const [image7, setImage7] = useState<File | null>(null);
   const [nom, setNom] = useState("");
 const [prix, setPrix] = useState("");
 const [ville, setVille] = useState("");
@@ -53,7 +55,8 @@ const [description, setDescription] = useState("");
   let image3Url = "";
   let image4Url = "";
   let image5Url = "";
-
+let image6Url = "";
+let image7Url = "";
   async function uploadImage(file: File | null) {
     if (!file) return "";
 
@@ -78,7 +81,8 @@ const [description, setDescription] = useState("");
     image3Url = await uploadImage(image3);
     image4Url = await uploadImage(image4);
     image5Url = await uploadImage(image5);
-
+image6Url = await uploadImage(image6);
+image7Url = await uploadImage(image7);
     const { error } = await supabase.from("machines").insert([
       {
         nom,
@@ -92,6 +96,8 @@ const [description, setDescription] = useState("");
         image3: image3Url,
         image4: image4Url,
         image5: image5Url,
+        image6: image6Url,
+image7: image7Url,
         description,
         disponible: true,
       },
@@ -117,6 +123,8 @@ const [description, setDescription] = useState("");
     setImage3(null);
     setImage4(null);
     setImage5(null);
+    setImage6(null);
+setImage7(null);
   } catch (err: any) {
     alert("❌ Erreur upload : " + err.message);
   }
@@ -223,6 +231,27 @@ const [description, setDescription] = useState("");
   onChange={(e) => {
     if (e.target.files && e.target.files.length > 0) {
       setImage5(e.target.files[0]);
+    }
+  }}
+  style={input}
+/>
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage6(e.target.files[0]);
+    }
+  }}
+  style={input}
+/>
+
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage7(e.target.files[0]);
     }
   }}
   style={input}

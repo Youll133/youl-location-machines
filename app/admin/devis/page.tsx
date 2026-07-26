@@ -1,5 +1,5 @@
 "use client";
-
+import { genererPDF } from "../../../lib/pdf";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabase";
 
@@ -85,10 +85,12 @@ async function supprimerDevis(id: number) {
         <thead>
           <tr style={{ background: "#FFD400" }}>
             <th style={th}>Nom</th>
-            <th style={th}>Téléphone</th>
-            <th style={th}>Machine</th>
-            <th style={th}>Jours</th>
-            <th style={th}>Message</th>
+<th style={th}>Téléphone</th>
+<th style={th}>Machine</th>
+<th style={th}>Ville</th>
+<th style={th}>Jours</th>
+<th style={th}>Prix total</th>
+<th style={th}>Description</th>
 <th style={th}>Actions</th>
           </tr>
         </thead>
@@ -97,12 +99,38 @@ async function supprimerDevis(id: number) {
           {devis.map((item) => (
             <tr key={item.id}>
               <td style={td}>{item.nom}</td>
-              <td style={td}>{item.telephone}</td>
-              <td style={td}>{item.machine}</td>
-              <td style={td}>{item.jours}</td>
-              <td style={td}>{item.message}</td>
+
+<td style={td}>{item.telephone}</td>
+
+<td style={td}>{item.machine}</td>
+
+<td style={td}>{item.ville}</td>
+
+<td style={td}>{item.jours}</td>
 
 <td style={td}>
+  {Number(item.prix_total).toLocaleString()} FCFA
+</td>
+
+<td style={td}>{item.description}</td>
+
+<td style={td}>
+  <button
+  onClick={() => genererPDF(item)}
+  style={{
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    padding: "10px 15px",
+    borderRadius: "8px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    marginRight: "10px",
+  }}
+>
+  📄 PDF
+</button>
+
   <button
     onClick={() => supprimerDevis(item.id)}
     style={{

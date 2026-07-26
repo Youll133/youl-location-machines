@@ -2,7 +2,7 @@ import FormulaireAvis from "../../../components/FormulaireAvis";
 import Avis from "../../../components/Avis";
 import Gallery from "../../../components/Gallery";
 import Link from "next/link";
-import { supabase } from "../../../lib/supabase";
+import { createClient } from "../../../lib/server";
 
 type Props = {
   params: Promise<{
@@ -12,7 +12,7 @@ type Props = {
 
 export default async function MachineDetails({ params }: Props) {
  const { id } = await params;
-
+const supabase = await createClient();
 const { data: machine } = await supabase
   .from("machines")
   .select("*")
@@ -34,6 +34,8 @@ const images = [
   machine?.image3,
   machine?.image4,
   machine?.image5,
+  machine?.image6,
+  machine?.image7,
 ].filter(Boolean);
 
 if (!machine) {

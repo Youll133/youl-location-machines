@@ -12,8 +12,15 @@ export async function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
-        setAll() {
-          // Les cookies sont gérés par le middleware
+
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              cookieStore.set(name, value, options);
+            });
+          } catch {
+            // Les cookies sont gérés par le middleware
+          }
         },
       },
     }
