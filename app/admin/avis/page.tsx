@@ -31,10 +31,14 @@ export default function AdminAvisPage() {
 
     if (!confirmation) return;
 
-    const { error } = await supabase
-      .from("avis")
-      .delete()
-      .eq("id", id);
+    const { data, error } = await supabase
+  .from("avis")
+  .delete()
+  .eq("id", id)
+  .select();
+
+console.log(data);
+console.log(error);
 
     if (error) {
       alert(error.message);
