@@ -201,16 +201,28 @@ if (!user) {
   ⭐ Gérer les avis
 </Link>
         <Link
-          href="/machines"
-          style={{
-            ...button,
-            textDecoration: "none",
-            color: "#111",
-            display: "inline-block",
-          }}
-        >
-          🌍 Voir le site
-        </Link>
+  href="/admin/galerie"
+  style={{
+    ...button,
+    textDecoration: "none",
+    color: "#111",
+    display: "inline-block",
+  }}
+>
+  📸 Gérer la galerie
+</Link>
+
+<Link
+  href="/machines"
+  style={{
+    ...button,
+    textDecoration: "none",
+    color: "#111",
+    display: "inline-block",
+  }}
+>
+  🌍 Voir le site
+</Link>
       </div>
     </main>
   );
