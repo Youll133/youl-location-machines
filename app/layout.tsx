@@ -21,29 +21,40 @@ export const metadata: Metadata = {
   title: "YOUL LOCATION MACHINES | Location d'engins de chantier en Côte d'Ivoire",
 
   description:
-    "YOUL LOCATION MACHINES est spécialisé dans la location d'engins et de machines de chantier partout en Côte d'Ivoire : pelles hydrauliques, bulldozers, chargeuses, niveleuses, compacteurs, camions et matériels BTP.",
+  "YOUL LOCATION MACHINES est votre spécialiste de la location d'engins de chantier en Côte d'Ivoire. Bulldozers, pelles hydrauliques, chargeuses, tractopelles, niveleuses, compacteurs et matériels BTP disponibles partout en Côte d'Ivoire.",
 
-  keywords: [
-    "location machine",
-    "location machines",
-    "location engins",
-    "engins de chantier",
-    "location pelle hydraulique",
-    "bulldozer",
-    "chargeuse",
-    "niveleuse",
-    "compacteur",
-    "BTP",
-    "Côte d'Ivoire",
-    "Abidjan",
-    "YOUL LOCATION MACHINES",
-  ],
+ keywords: [
+  "YOUL LOCATION MACHINES",
+  "location engins Côte d'Ivoire",
+  "location machines Côte d'Ivoire",
+  "location pelle hydraulique",
+  "location bulldozer",
+  "location chargeuse",
+  "location niveleuse",
+  "location tractopelle",
+  "location compacteur",
+  "location camion",
+  "location engins Abidjan",
+  "location engins Bouaké",
+  "location engins Yamoussoukro",
+  "engins BTP",
+  "entreprise BTP Côte d'Ivoire",
+  "matériel chantier",
+  "travaux publics",
+  "terrassement",
+  "chantier Côte d'Ivoire",
+],
 
   authors: [
     {
       name: "YOUL LOCATION MACHINES",
     },
   ],
+creator: "YOUL LOCATION MACHINES",
+
+publisher: "YOUL LOCATION MACHINES",
+
+category: "Location d'engins de chantier",
 
   openGraph: {
     title: "YOUL LOCATION MACHINES",
