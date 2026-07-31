@@ -1,6 +1,17 @@
 import { MetadataRoute } from "next";
+import { createClient } from "../lib/server";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const supabase = await createClient();
+
+const { data: machines } = await supabase
+  .from("machines")
+  .select("id");
+  const machineUrls =
+  machines?.map((machine) => ({
+    url: `https://www.youllocationmachines.com/machine/${machine.id}`,
+    lastModified: new Date(),
+  })) || [];
   return [
     {
       url: "https://www.youllocationmachines.com",
@@ -34,5 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://www.youllocationmachines.com/reservation",
       lastModified: new Date(),
     },
+    ...machineUrls,
   ];
 }
