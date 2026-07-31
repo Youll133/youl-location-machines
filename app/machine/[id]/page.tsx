@@ -3,13 +3,56 @@ import Avis from "../../../components/Avis";
 import Gallery from "../../../components/Gallery";
 import Link from "next/link";
 import { createClient } from "../../../lib/server";
-
+import type { Metadata } from "next";
 type Props = {
   params: Promise<{
     id: string;
   }>;
 };
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
 
+  const supabase = await createClient();
+
+  const { data: machine } = await supabase
+    .from("machines")
+    .select("*")
+    .eq("id", Number(id))
+    .single();
+
+  if (!machine) {
+    return {
+      title: "Machine introuvable | YOUL LOCATION MACHINES",
+    };
+  }
+
+  return {
+  title: `Location ${machine.nom} en Côte d'Ivoire | YOUL LOCATION MACHINES`,
+  description: `Louez ${machine.nom} partout en Côte d'Ivoire avec YOUL LOCATION MACHINES. Machines fiables, disponibilité rapide et devis gratuit.`,
+  keywords: [
+    `location ${machine.nom}`,
+    `location ${machine.nom} Côte d'Ivoire`,
+    `location ${machine.nom} Abidjan`,
+    "location machine BTP",
+    "location engins",
+    "YOUL LOCATION MACHINES",
+  ],
+  openGraph: {
+  title: `Location ${machine.nom} en Côte d'Ivoire | YOUL LOCATION MACHINES`,
+  description: `Louez ${machine.nom} partout en Côte d'Ivoire avec YOUL LOCATION MACHINES.`,
+  url: `https://www.youllocationmachines.com/machine/${id}`,
+type: "website",
+  images: [
+    {
+      url: `https://www.youllocationmachines.com${machine.image}`,
+      width: 1200,
+      height: 630,
+      alt: machine.nom,
+    },
+  ],
+},
+};
+}
 export default async function MachineDetails({ params }: Props) {
  const { id } = await params;
 const supabase = await createClient();
@@ -336,7 +379,28 @@ Contactez-nous dès maintenant pour obtenir un devis gratuit.
 <FormulaireAvis machineId={machine.id} />
 
 <Avis machineId={machine.id} />
-
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: machine.nom,
+      image: `https://www.youllocationmachines.com${machine.image}`,
+      description: `Location de ${machine.nom} partout en Côte d'Ivoire.`,
+      brand: {
+        "@type": "Organization",
+        name: "YOUL LOCATION MACHINES",
+      },
+      offers: {
+        "@type": "Offer",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "XOF",
+        price: machine.prix,
+      },
+    }),
+  }}
+/>
 </main>
   );
 }

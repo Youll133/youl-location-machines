@@ -111,6 +111,26 @@ export default function RootLayout({
         {children}
 
         <Footer />
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "YOUL LOCATION MACHINES",
+      image: "https://www.youllocationmachines.com/logos/logo.png",
+      url: "https://www.youllocationmachines.com",
+      telephone: "+2250748416657",
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "CI",
+      },
+      areaServed: "Côte d'Ivoire",
+      description:
+        "Location d'engins de chantier partout en Côte d'Ivoire : bulldozers, pelles hydrauliques, chargeuses, niveleuses, tractopelles, compacteurs et matériels BTP.",
+    }),
+  }}
+/>
       </body>
     </html>
   );
