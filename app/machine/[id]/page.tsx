@@ -28,7 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
   title: `Location ${machine.nom} en Côte d'Ivoire | YOUL LOCATION MACHINES`,
+
   description: `Louez ${machine.nom} partout en Côte d'Ivoire avec YOUL LOCATION MACHINES. Machines fiables, disponibilité rapide et devis gratuit.`,
+
+  alternates: {
+    canonical: `https://www.youllocationmachines.com/machine/${machine.id}`,
+  },
+
   keywords: [
     `location ${machine.nom}`,
     `location ${machine.nom} Côte d'Ivoire`,
@@ -37,20 +43,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     "location engins",
     "YOUL LOCATION MACHINES",
   ],
+
   openGraph: {
-  title: `Location ${machine.nom} en Côte d'Ivoire | YOUL LOCATION MACHINES`,
-  description: `Louez ${machine.nom} partout en Côte d'Ivoire avec YOUL LOCATION MACHINES.`,
-  url: `https://www.youllocationmachines.com/machine/${id}`,
-type: "website",
-  images: [
-    {
-      url: `https://www.youllocationmachines.com${machine.image}`,
-      width: 1200,
-      height: 630,
-      alt: machine.nom,
-    },
-  ],
-},
+    title: `Location ${machine.nom} en Côte d'Ivoire | YOUL LOCATION MACHINES`,
+    description: `Louez ${machine.nom} partout en Côte d'Ivoire avec YOUL LOCATION MACHINES.`,
+    url: `https://www.youllocationmachines.com/machine/${machine.id}`,
+    type: "website",
+    images: [
+      {
+        url: `https://www.youllocationmachines.com${machine.image}`,
+        width: 1200,
+        height: 630,
+        alt: machine.nom,
+      },
+    ],
+  },
 };
 }
 export default async function MachineDetails({ params }: Props) {
