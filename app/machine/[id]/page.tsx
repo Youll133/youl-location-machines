@@ -132,18 +132,29 @@ return (
 </p>
       <hr style={{ margin: "35px 0" }} />
 
-      <h2>Description</h2>
+     <h2>Description</h2>
 
-      <p
-        style={{
-          fontSize: "21px",
-          lineHeight: "36px",
-        }}
-      >
-        Cette machine est entretenue régulièrement et est disponible pour tous
-        vos travaux de chantier, terrassement, nivellement, construction,
-        voirie et grands projets partout en Côte d'Ivoire.
-      </p>
+<p
+  style={{
+    fontSize: "21px",
+    lineHeight: "36px",
+  }}
+>
+  {machine.nom} est disponible à la location partout en Côte d'Ivoire pour
+  tous vos travaux de terrassement, construction, voirie, démolition,
+  manutention et grands chantiers.
+
+  Chez YOUL LOCATION MACHINES, toutes nos machines sont entretenues
+  régulièrement afin de garantir une excellente fiabilité, de hautes
+  performances et une sécurité maximale sur vos chantiers.
+
+  Que votre projet soit situé à Abidjan, Bouaké, Yamoussoukro, San Pedro,
+  Korhogo ou dans toute autre région de Côte d'Ivoire, notre équipe peut
+  intervenir rapidement avec cette machine.
+
+  Nous proposons également un accompagnement personnalisé afin de vous aider
+  à choisir l'engin le mieux adapté à votre chantier.
+</p>
 
       <h2 style={{ marginTop: "40px" }}>
         Pourquoi choisir YOUL LOCATION MACHINES ?
@@ -161,6 +172,38 @@ return (
         <li>✅ Réponse rapide</li>
         <li>✅ Service professionnel</li>
       </ul>
+      <h2 style={{ marginTop: "50px" }}>
+  Location de {machine.nom} en Côte d'Ivoire
+</h2>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+  Vous recherchez une location de {machine.nom} à Abidjan, Bouaké,
+  Yamoussoukro, San Pedro ou partout en Côte d'Ivoire ?
+
+  YOUL LOCATION MACHINES met cette machine à votre disposition pour tous vos
+  travaux BTP, terrassement, voirie et construction avec une disponibilité
+  rapide, des tarifs compétitifs et un accompagnement professionnel.
+</p>
+<h2 style={{ marginTop: "50px" }}>
+  Besoin de louer cette machine ?
+</h2>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Notre équipe est disponible pour répondre rapidement à votre demande de
+location de {machine.nom}. Nous intervenons partout en Côte d'Ivoire avec
+des machines fiables, entretenues et prêtes à travailler sur vos chantiers.
+Contactez-nous dès maintenant pour obtenir un devis gratuit.
+</p>
 
      <div
   style={{
