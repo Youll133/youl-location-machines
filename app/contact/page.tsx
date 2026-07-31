@@ -1,3 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact | YOUL LOCATION MACHINES",
+
+  description:
+    "Contactez YOUL LOCATION MACHINES pour la location d'engins de chantier partout en Côte d'Ivoire. Téléphone, WhatsApp, email et devis gratuit.",
+
+  alternates: {
+    canonical: "https://www.youllocationmachines.com/contact",
+  },
+
+  openGraph: {
+    title: "Contact | YOUL LOCATION MACHINES",
+    description:
+      "Besoin d'un engin de chantier ? Contactez notre équipe partout en Côte d'Ivoire.",
+    url: "https://www.youllocationmachines.com/contact",
+    type: "website",
+  },
+};
 export default function ContactPage() {
   return (
     <main

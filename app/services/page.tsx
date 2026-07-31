@@ -1,3 +1,23 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services | YOUL LOCATION MACHINES",
+
+  description:
+    "Découvrez tous les services proposés par YOUL LOCATION MACHINES : location d'engins de chantier, livraison sur chantier, chauffeurs qualifiés, maintenance, assistance et devis gratuit partout en Côte d'Ivoire.",
+
+  alternates: {
+    canonical: "https://www.youllocationmachines.com/services",
+  },
+
+  openGraph: {
+    title: "Services | YOUL LOCATION MACHINES",
+    description:
+      "Location d'engins de chantier et services BTP partout en Côte d'Ivoire.",
+    url: "https://www.youllocationmachines.com/services",
+    type: "website",
+  },
+};
 export default function ServicesPage() {
   const services = [
     {
