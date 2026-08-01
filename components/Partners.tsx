@@ -49,11 +49,11 @@ export default function Partners() {
         />
 
         <Image
-          src="/partners/komatsu.png"
-          alt="Komatsu"
-          width={150}
-          height={70}
-        />
+  src="/partners/komatsu.jpg"
+  alt="Komatsu"
+  width={150}
+  height={70}
+/>
       </div>
     </section>
   );

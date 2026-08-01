@@ -53,7 +53,7 @@ export default function Navbar() {
           }}
         >
           <Image
-            src="/logos/logo.png"
+           src="/logos/logo.jpg"
             alt="YOUL"
             width={60}
             height={60}
