@@ -1,36 +1,56 @@
 export default function FaqPage() {
   const questions = [
-    {
-      question: "Comment réserver une machine ?",
-      reponse:
-        "Vous pouvez réserver directement depuis notre page de réservation ou nous contacter par téléphone ou WhatsApp.",
-    },
-    {
-      question: "Intervenez-vous partout en Côte d'Ivoire ?",
-      reponse:
-        "Oui, nous proposons nos services sur l'ensemble du territoire ivoirien.",
-    },
-    {
-      question: "Peut-on louer une machine avec un chauffeur ?",
-      reponse:
-        "Oui, selon la machine choisie, nous pouvons mettre à disposition un opérateur qualifié.",
-    },
-    {
-      question: "Comment obtenir un devis ?",
-      reponse:
-        "Remplissez le formulaire de devis sur notre site. Nous vous répondrons rapidement.",
-    },
-    {
-      question: "Quels sont les moyens de paiement ?",
-      reponse:
-        "Nous acceptons les virements bancaires, Mobile Money et d'autres moyens de paiement selon votre situation.",
-    },
-    {
-      question: "Les machines sont-elles entretenues ?",
-      reponse:
-        "Oui, toutes nos machines sont régulièrement entretenues afin de garantir leur fiabilité et leur sécurité.",
-    },
-  ];
+  {
+    question: "Comment réserver une machine ?",
+    reponse:
+      "Vous pouvez réserver directement depuis notre page de réservation ou nous contacter par téléphone ou WhatsApp.",
+  },
+  {
+    question: "Intervenez-vous partout en Côte d'Ivoire ?",
+    reponse:
+      "Oui, nous proposons la location d'engins de chantier partout en Côte d'Ivoire, notamment à Abidjan, Bouaké, Yamoussoukro, San Pedro, Korhogo et dans toutes les régions.",
+  },
+  {
+    question: "Peut-on louer une machine avec un chauffeur ?",
+    reponse:
+      "Oui, nous pouvons mettre à disposition un opérateur qualifié selon la machine choisie.",
+  },
+  {
+    question: "Comment obtenir un devis ?",
+    reponse:
+      "Il suffit de remplir notre formulaire ou de nous contacter directement. Le devis est gratuit.",
+  },
+  {
+    question: "Quels sont les moyens de paiement ?",
+    reponse:
+      "Nous acceptons les virements bancaires, Mobile Money et d'autres moyens de paiement.",
+  },
+  {
+    question: "Les machines sont-elles entretenues ?",
+    reponse:
+      "Oui, toutes nos machines sont entretenues régulièrement afin de garantir leur sécurité et leurs performances.",
+  },
+  {
+    question: "Quels types d'engins proposez-vous ?",
+    reponse:
+      "Nous proposons des pelles hydrauliques, bulldozers, chargeuses, niveleuses, compacteurs, tractopelles et de nombreux matériels BTP.",
+  },
+  {
+    question: "Combien coûte la location d'un engin ?",
+    reponse:
+      "Le prix dépend du type de machine, de la durée de location et du chantier. Contactez-nous pour un devis personnalisé.",
+  },
+  {
+    question: "Combien de temps faut-il pour livrer une machine ?",
+    reponse:
+      "Nous faisons le maximum pour intervenir rapidement selon la disponibilité de la machine et la localisation du chantier.",
+  },
+  {
+    question: "Pourquoi choisir YOUL LOCATION MACHINES ?",
+    reponse:
+      "Parce que nous proposons des machines fiables, un service professionnel, une intervention rapide et des tarifs compétitifs partout en Côte d'Ivoire.",
+  },
+];
 
   return (
     <main
