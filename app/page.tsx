@@ -41,34 +41,57 @@ export default function Home() {
   <h2>Location d'engins de chantier en Côte d'Ivoire</h2>
 
   <p>
-    YOUL LOCATION MACHINES est spécialisée dans la location d'engins de
-    chantier partout en Côte d'Ivoire. Nous mettons à disposition des
-    entreprises, particuliers et professionnels du BTP une large flotte de
-    machines adaptées à tous les travaux de terrassement, construction,
-    nivellement, démolition et manutention.
+    YOUL LOCATION MACHINES est votre spécialiste de la location d'engins de
+    chantier en Côte d'Ivoire. Nous accompagnons les entreprises, les
+    professionnels du BTP, les collectivités ainsi que les particuliers dans
+    leurs projets de terrassement, construction, voirie, démolition,
+    manutention et travaux publics. Grâce à une flotte de machines modernes,
+    entretenues et performantes, nous intervenons rapidement sur tous types de
+    chantiers.
   </p>
-
-  <h2>Nos machines disponibles</h2>
 
   <p>
-    Nous proposons la location de pelles hydrauliques, bulldozers,
-    chargeuses, niveleuses, compacteurs, tractopelles, camions et plusieurs
-    autres engins de chantier pour tous vos projets.
+    Notre entreprise propose la location de pelles hydrauliques, bulldozers,
+    chargeuses, tractopelles, niveleuses, compacteurs, camions et de nombreux
+    autres équipements destinés aux travaux de génie civil et de construction.
+    Chaque machine est contrôlée régulièrement afin de garantir sécurité,
+    fiabilité et rendement optimal sur vos chantiers.
   </p>
 
-  <h2>Nos zones d'intervention</h2>
+  <h2>Des machines disponibles partout en Côte d'Ivoire</h2>
 
   <p>
     Nos équipes interviennent à Abidjan, Bouaké, Yamoussoukro, San Pedro,
-    Korhogo, Daloa, Man et partout en Côte d'Ivoire.
+    Korhogo, Daloa, Man et dans toutes les régions de Côte d'Ivoire. Nous
+    assurons une livraison rapide des engins directement sur votre chantier afin
+    de vous permettre de commencer vos travaux dans les meilleurs délais.
+  </p>
+
+  <h2>Des solutions adaptées à tous vos chantiers</h2>
+
+  <p>
+    Que vous réalisiez des travaux de terrassement, de construction de routes,
+    de bâtiments, de lotissements, de plateformes industrielles ou de grands
+    projets de travaux publics, YOUL LOCATION MACHINES dispose des équipements
+    adaptés à vos besoins. Nos équipes vous accompagnent dans le choix de
+    l'engin le plus efficace selon votre projet.
   </p>
 
   <h2>Pourquoi choisir YOUL LOCATION MACHINES ?</h2>
 
   <p>
-    Nous proposons des machines fiables, des opérateurs qualifiés, des prix
-    compétitifs, un service rapide et un accompagnement personnalisé pour
-    tous vos chantiers.
+    Notre priorité est la satisfaction de nos clients. Nous proposons des
+    machines entretenues, des tarifs compétitifs, une assistance rapide, des
+    devis gratuits et un accompagnement personnalisé. Notre expérience dans la
+    location d'engins de chantier en Côte d'Ivoire nous permet de répondre aux
+    besoins des petits comme des grands chantiers avec professionnalisme.
+  </p>
+
+  <p>
+    Si vous recherchez une entreprise fiable pour la location d'engins de
+    chantier en Côte d'Ivoire, faites confiance à YOUL LOCATION MACHINES.
+    Contactez-nous dès aujourd'hui pour obtenir un devis gratuit et bénéficier
+    d'un service rapide, professionnel et adapté à votre chantier.
   </p>
 </section>
     </main>
