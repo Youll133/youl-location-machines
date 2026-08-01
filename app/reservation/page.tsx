@@ -252,6 +252,45 @@ setPrixTotal(0);
 >
   📩 Envoyer la demande
 </button>
+<hr style={{ margin: "60px 0" }} />
+
+<h2>Réserver un engin de chantier en Côte d'Ivoire</h2>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+YOUL LOCATION MACHINES vous permet de réserver rapidement des engins de
+chantier partout en Côte d'Ivoire. Que vous recherchiez une pelle hydraulique,
+un bulldozer, une chargeuse, une niveleuse, un compacteur ou un tractopelle,
+notre équipe vous accompagne dans le choix de la machine adaptée à votre
+chantier.
+</p>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Après réception de votre demande, nous préparons un devis gratuit et nous vous
+contactons rapidement afin de confirmer la disponibilité de la machine, la
+durée de location ainsi que les modalités de livraison sur votre chantier à
+Abidjan, Bouaké, Yamoussoukro, San Pedro ou partout en Côte d'Ivoire.
+</p>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Notre objectif est de proposer une location d'engins de chantier simple,
+rapide et professionnelle avec des machines entretenues, des tarifs
+compétitifs et un accompagnement personnalisé pour tous vos travaux BTP.
+</p>
     </main>
   );
 }
