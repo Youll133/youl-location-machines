@@ -119,6 +119,32 @@ export default function EntreprisePage() {
           <li>✅ Équipe professionnelle.</li>
         </ul>
       </div>
+      <hr style={{ margin: "60px 0" }} />
+
+<h2>Une entreprise spécialisée dans la location d'engins de chantier en Côte d'Ivoire</h2>
+
+<p style={{ fontSize: "20px", lineHeight: "35px" }}>
+YOUL LOCATION MACHINES accompagne les entreprises, les collectivités et les
+particuliers dans tous leurs projets de construction, de terrassement, de
+voirie et de travaux publics. Nous proposons la location de pelles
+hydrauliques, bulldozers, chargeuses, niveleuses, compacteurs,
+tractopelles et autres matériels BTP partout en Côte d'Ivoire.
+</p>
+
+<p style={{ fontSize: "20px", lineHeight: "35px" }}>
+Notre entreprise intervient à Abidjan, Yamoussoukro, Bouaké, San Pedro,
+Korhogo et dans toutes les régions du pays afin de fournir des machines
+fiables, entretenues et disponibles rapidement. Notre objectif est de
+garantir à chaque client un matériel performant et un accompagnement
+professionnel pour assurer la réussite de son chantier.
+</p>
+
+<p style={{ fontSize: "20px", lineHeight: "35px" }}>
+Grâce à notre expérience dans la location d'engins de chantier en Côte
+d'Ivoire, nous mettons un point d'honneur à proposer des équipements
+adaptés à chaque besoin avec des tarifs compétitifs, une intervention
+rapide et un service de qualité.
+</p>
     </main>
   );
 }
