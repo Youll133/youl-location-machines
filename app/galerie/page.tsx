@@ -89,6 +89,45 @@ export default function GaleriePage() {
           </div>
         ))}
       </div>
+      <hr style={{ margin: "60px 0" }} />
+
+<h2>Location d'engins de chantier en Côte d'Ivoire</h2>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Cette galerie présente quelques réalisations de YOUL LOCATION MACHINES sur
+différents chantiers en Côte d'Ivoire. Nos équipes interviennent régulièrement
+pour des travaux de terrassement, de construction, de voirie, de démolition
+et de travaux publics avec des machines performantes et entretenues.
+</p>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Nous proposons la location de pelles hydrauliques, bulldozers, chargeuses,
+tractopelles, niveleuses, compacteurs et autres matériels BTP à Abidjan,
+Yamoussoukro, Bouaké, San Pedro, Korhogo ainsi que dans toutes les régions
+de Côte d'Ivoire.
+</p>
+
+<p
+  style={{
+    fontSize: "20px",
+    lineHeight: "35px",
+  }}
+>
+Grâce à notre expérience et à notre réactivité, YOUL LOCATION MACHINES
+accompagne les entreprises et les particuliers avec des solutions adaptées à
+chaque chantier. Cette galerie illustre la qualité de nos interventions et la
+fiabilité de notre parc de machines.
+</p>
     </main>
   );
 }
