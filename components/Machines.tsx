@@ -132,14 +132,16 @@ if (loading) {
 >
  <FavoriteButton machineId={machine.id} />
               <img
-                src={machine.image}
-                alt={machine.nom}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                }}
-              />
+  src={machine.image}
+  alt={`${machine.nom} en location chez YOUL LOCATION MACHINES en Côte d'Ivoire`}
+  loading="lazy"
+  decoding="async"
+  style={{
+    width: "100%",
+    height: "100%",
+    objectFit: "contain",
+  }}
+/>
             </div>
 
             <div style={{ padding: "28px" }}>
