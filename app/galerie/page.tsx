@@ -66,14 +66,16 @@ export default function GaleriePage() {
             }}
           >
             <img
-              src={photo.image}
-              alt={photo.titre}
-              style={{
-                width: "100%",
-                height: "280px",
-                objectFit: "cover",
-              }}
-            />
+  src={photo.image}
+  alt={`${photo.machine} sur un chantier en Côte d'Ivoire - YOUL LOCATION MACHINES`}
+  loading="lazy"
+  decoding="async"
+  style={{
+    width: "100%",
+    height: "280px",
+    objectFit: "cover",
+  }}
+/>
 
             <div
               style={{
