@@ -107,7 +107,6 @@ if (loading) {
   .filter((machine) =>
     machine.nom.toLowerCase().includes(search.toLowerCase())
   )
-  .slice(0, 6)
   .map((machine) => (
           <div
             key={machine.id}
