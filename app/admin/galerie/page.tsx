@@ -89,14 +89,38 @@ setMachine("");
       <h1>📸 Gérer la galerie</h1>
 
       <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => {
-          if (e.target.files?.length) {
-            setImage(e.target.files[0]);
-          }
-        }}
-      />
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    const fichier = e.currentTarget.files?.[0] || null;
+
+    setImage(fichier);
+
+    if (fichier) {
+      console.log("Photo sélectionnée :", fichier.name);
+    }
+  }}
+  style={{
+    width: "100%",
+    padding: "15px",
+    marginBottom: "10px",
+    border: "2px solid #ddd",
+    borderRadius: "10px",
+    cursor: "pointer",
+  }}
+/>
+
+{image && (
+  <p
+    style={{
+      marginBottom: "20px",
+      color: "#16a34a",
+      fontWeight: "bold",
+    }}
+  >
+    ✅ Photo sélectionnée : {image.name}
+  </p>
+)}
 
       <br />
       <br />
