@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
 
-
 export default function ReservationPage() {
   const [nom, setNom] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -13,101 +12,132 @@ export default function ReservationPage() {
   const [fin, setFin] = useState("");
   const [description, setDescription] = useState("");
   const [prixJour, setPrixJour] = useState(0);
-const [prixTotal, setPrixTotal] = useState(0);
+  const [prixTotal, setPrixTotal] = useState(0);
 
+  let nbJours = 0;
 
- let nbJours = 0;
+  if (debut && fin) {
+    const dateDebut = new Date(debut);
+    const dateFin = new Date(fin);
 
-if (debut && fin) {
-  const dateDebut = new Date(debut);
-  const dateFin = new Date(fin);
+    const difference = dateFin.getTime() - dateDebut.getTime();
 
-  const difference = dateFin.getTime() - dateDebut.getTime();
+    nbJours = Math.ceil(
+      difference / (1000 * 60 * 60 * 24)
+    ) + 1;
+  }
 
-  nbJours = Math.ceil(difference / (1000 * 60 * 60 * 24)) + 1;
-}
+  useEffect(() => {
+    async function chargerPrix() {
+      if (!machine) {
+        setPrixJour(0);
+        setPrixTotal(0);
+        return;
+      }
 
-useEffect(() => {
-  async function chargerPrix() {
-    if (!machine) return;
+      const { data, error } = await supabase
+        .from("machines")
+        .select("nom, prix");
 
-    const { data } = await supabase
-      .from("machines")
-      .select("prix")
-      .ilike("nom", machine)
-      .maybeSingle();
+      if (error) {
+        console.error("Erreur récupération machines :", error);
+        setPrixJour(0);
+        setPrixTotal(0);
+        return;
+      }
 
-    if (data) {
-      const prix = Number(
-        String(data.prix).replace(/[^\d]/g, "")
+      const normaliser = (texte: string) =>
+        texte
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
+
+      const machineRecherchee = normaliser(machine);
+
+      const machineTrouvee = data?.find(
+        (m) => normaliser(m.nom) === machineRecherchee
       );
 
-      setPrixJour(prix);
-      setPrixTotal(prix * nbJours);
-    } else {
-      setPrixJour(0);
-      setPrixTotal(0);
+      if (machineTrouvee) {
+        const prix = Number(
+          String(machineTrouvee.prix).replace(/[^\d]/g, "")
+        );
+
+        setPrixJour(prix);
+        setPrixTotal(prix * nbJours);
+      } else {
+        console.warn("Machine introuvable :", machine);
+
+        setPrixJour(0);
+        setPrixTotal(0);
+      }
     }
+
+    chargerPrix();
+  }, [machine, nbJours]);
+
+  async function envoyerDevis() {
+    if (
+      !nom.trim() ||
+      !telephone.trim() ||
+      !machine.trim() ||
+      !ville.trim() ||
+      !debut ||
+      !fin
+    ) {
+      alert("❌ Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    if (new Date(fin) < new Date(debut)) {
+      alert("❌ La date de fin doit être après la date de début.");
+      return;
+    }
+
+    if (telephone.replace(/\D/g, "").length < 8) {
+      alert("❌ Numéro de téléphone invalide.");
+      return;
+    }
+
+    if (nbJours <= 0) {
+      alert("❌ Veuillez choisir des dates valides.");
+      return;
+    }
+
+    const { error } = await supabase.from("devis").insert([
+      {
+        nom,
+        telephone,
+        machine,
+        ville,
+        date_debut: debut,
+        date_fin: fin,
+        jours: nbJours,
+        description,
+        prix_total: prixTotal,
+      },
+    ]);
+
+    if (error) {
+      alert("❌ " + error.message);
+      return;
+    }
+
+    alert("✅ Demande enregistrée !");
+
+    setNom("");
+    setTelephone("");
+    setMachine("");
+    setVille("");
+    setDebut("");
+    setFin("");
+    setDescription("");
+    setPrixJour(0);
+    setPrixTotal(0);
   }
 
-  chargerPrix();
-}, [machine, nbJours]);
-async function envoyerDevis() {
-  if (
-    !nom.trim() ||
-    !telephone.trim() ||
-    !machine.trim() ||
-    !ville.trim() ||
-    !debut ||
-    !fin
-  ) {
-    alert("❌ Veuillez remplir tous les champs obligatoires.");
-    return;
-  }
-
-  if (new Date(fin) < new Date(debut)) {
-    alert("❌ La date de fin doit être après la date de début.");
-    return;
-  }
-  if (telephone.replace(/\D/g, "").length < 8) {
-  alert("❌ Numéro de téléphone invalide.");
-  return;
-}
-if (nbJours <= 0) {
-  alert("❌ Veuillez choisir des dates valides.");
-  return;
-}
-  const { error } = await supabase.from("devis").insert([
-    {
-      nom,
-      telephone,
-      machine,
-      ville,
-      date_debut: debut,
-      date_fin: fin,
-      jours: nbJours,
-      description,
-      prix_total: prixTotal,
-    },
-  ]);
-
-  if (error) {
-    alert("❌ " + error.message);
-    return;
-  }
-
-  alert("✅ Demande enregistrée !");
-
-  setNom("");
-  setTelephone("");
-  setMachine("");
-  setVille("");
-  setDebut("");
-  setFin("");
-  setDescription("");
-  setPrixJour(0);
-setPrixTotal(0);
-}
   return (
     <main
       style={{
@@ -156,12 +186,12 @@ setPrixTotal(0);
       />
 
       <input
-  type="text"
-  placeholder="Machine souhaitée"
-  value={machine}
-  onChange={(e) => setMachine(e.target.value)}
-  style={input}
-/>
+        type="text"
+        placeholder="Machine souhaitée"
+        value={machine}
+        onChange={(e) => setMachine(e.target.value)}
+        style={input}
+      />
 
       <input
         type="text"
@@ -184,12 +214,15 @@ setPrixTotal(0);
       <label style={label}>Date de fin</label>
 
       <input
-  type="date"
-  value={fin}
-  min={debut || new Date().toISOString().split("T")[0]}
-  onChange={(e) => setFin(e.target.value)}
-  style={input}
-/>
+        type="date"
+        value={fin}
+        min={
+          debut ||
+          new Date().toISOString().split("T")[0]
+        }
+        onChange={(e) => setFin(e.target.value)}
+        style={input}
+      />
 
       <textarea
         placeholder="Décrivez votre chantier..."
@@ -202,7 +235,8 @@ setPrixTotal(0);
           fontFamily: "inherit",
         }}
       />
-            {nbJours > 0 && (
+
+      {nbJours > 0 && (
         <div
           style={{
             background: "#f3f4f6",
@@ -211,7 +245,9 @@ setPrixTotal(0);
             marginBottom: "25px",
           }}
         >
-          <h2 style={{ marginTop: 0 }}>📋 Récapitulatif</h2>
+          <h2 style={{ marginTop: 0 }}>
+            📋 Récapitulatif
+          </h2>
 
           <p>
             🚜 Machine : <strong>{machine}</strong>
@@ -220,77 +256,90 @@ setPrixTotal(0);
           <p>
             📅 Nombre de jours : <strong>{nbJours}</strong>
           </p>
-          <p>
-  💰 Prix par jour : <strong>{prixJour.toLocaleString()} FCFA</strong>
-</p>
 
-<p
-  style={{
-    fontSize: "24px",
-    fontWeight: "bold",
-    color: "#16a34a",
-  }}
->
-  Total estimé : {prixTotal.toLocaleString()} FCFA
-</p>
+          <p>
+            💰 Prix par jour :{" "}
+            <strong>
+              {prixJour.toLocaleString()} FCFA
+            </strong>
+          </p>
+
+          <p
+            style={{
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#16a34a",
+            }}
+          >
+            Total estimé :{" "}
+            {prixTotal.toLocaleString()} FCFA
+          </p>
         </div>
       )}
 
       <button
-  onClick={envoyerDevis}
-  style={{
-    width: "100%",
-    padding: "18px",
-    background: "#22c55e",
-    color: "#fff",
-    border: "none",
-    borderRadius: "12px",
-    fontSize: "20px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  }}
->
-  📩 Envoyer la demande
-</button>
-<hr style={{ margin: "60px 0" }} />
+        onClick={envoyerDevis}
+        style={{
+          width: "100%",
+          padding: "18px",
+          background: "#22c55e",
+          color: "#fff",
+          border: "none",
+          borderRadius: "12px",
+          fontSize: "20px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        📩 Envoyer la demande
+      </button>
 
-<h2>Réserver un engin de chantier en Côte d'Ivoire</h2>
+      <hr style={{ margin: "60px 0" }} />
 
-<p
-  style={{
-    fontSize: "20px",
-    lineHeight: "35px",
-  }}
->
-YOUL LOCATION MACHINES vous permet de réserver rapidement des engins de
-chantier partout en Côte d'Ivoire. Que vous recherchiez une pelle hydraulique,
-un bulldozer, une chargeuse, une niveleuse, un compacteur ou un tractopelle,
-notre équipe vous accompagne dans le choix de la machine adaptée à votre
-chantier.
-</p>
+      <h2>
+        Réserver un engin de chantier en Côte d'Ivoire
+      </h2>
 
-<p
-  style={{
-    fontSize: "20px",
-    lineHeight: "35px",
-  }}
->
-Après réception de votre demande, nous préparons un devis gratuit et nous vous
-contactons rapidement afin de confirmer la disponibilité de la machine, la
-durée de location ainsi que les modalités de livraison sur votre chantier à
-Abidjan, Bouaké, Yamoussoukro, San Pedro ou partout en Côte d'Ivoire.
-</p>
+      <p
+        style={{
+          fontSize: "20px",
+          lineHeight: "35px",
+        }}
+      >
+        YOUL LOCATION MACHINES vous permet de réserver
+        rapidement des engins de chantier partout en Côte
+        d'Ivoire. Que vous recherchiez une pelle hydraulique,
+        un bulldozer, une chargeuse, une niveleuse, un
+        compacteur ou un tractopelle, notre équipe vous
+        accompagne dans le choix de la machine adaptée à
+        votre chantier.
+      </p>
 
-<p
-  style={{
-    fontSize: "20px",
-    lineHeight: "35px",
-  }}
->
-Notre objectif est de proposer une location d'engins de chantier simple,
-rapide et professionnelle avec des machines entretenues, des tarifs
-compétitifs et un accompagnement personnalisé pour tous vos travaux BTP.
-</p>
+      <p
+        style={{
+          fontSize: "20px",
+          lineHeight: "35px",
+        }}
+      >
+        Après réception de votre demande, nous préparons un
+        devis gratuit et nous vous contactons rapidement afin
+        de confirmer la disponibilité de la machine, la durée
+        de location ainsi que les modalités de livraison sur
+        votre chantier à Abidjan, Bouaké, Yamoussoukro, San
+        Pedro ou partout en Côte d'Ivoire.
+      </p>
+
+      <p
+        style={{
+          fontSize: "20px",
+          lineHeight: "35px",
+        }}
+      >
+        Notre objectif est de proposer une location d'engins
+        de chantier simple, rapide et professionnelle avec des
+        machines entretenues, des tarifs compétitifs et un
+        accompagnement personnalisé pour tous vos travaux BTP.
+      </p>
     </main>
   );
 }
