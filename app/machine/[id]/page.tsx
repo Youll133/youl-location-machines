@@ -101,12 +101,9 @@ export default async function MachineDetails({ params }: Props) {
   }
 
   // Compteur de vues
-  await supabase
-    .from("machines")
-    .update({
-      vues: (machine.vues ?? 0) + 1,
-    })
-    .eq("id", machine.id);
+  await supabase.rpc("increment_machine_views", {
+    machine_id: machine.id,
+  });
 
   // Machines similaires
   const { data: machines } = await supabase
